@@ -1,0 +1,45 @@
+.about-content-text{
+    margin-bottom: 15px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color:#fff;
+
+}
+.content {
+    display: flex;
+    gap:50px;
+}
+.content-about-left{
+    margin-right: 141px;
+    display: flex;
+    align-items: center
+}
+
+.content-about-right {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    .content-right-img{
+        max-width: 600px;
+    }
+}
+
+.about-header {
+    font-weight: 300;
+    font-family: 'Roboto';
+    color: #fff;
+    writing-mode: vertical-lr;
+    direction: ltl;
+    transform: rotate(180deg);
+    font-size: 60px;
+}
+.about-content-header {
+    font-weight: 300;
+    font-family: 'Roboto';
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 5px;
+}

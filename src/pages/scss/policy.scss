@@ -1,0 +1,31 @@
+
+
+.wrapper__policy{
+    max-width: 1500px;
+    margin: 0 auto;
+    color:#fff;
+
+
+
+    .policy__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        article {
+            p {
+                width: 1354px;
+                height: 100%;
+                text-align: center;
+                margin-bottom: 78px;
+                line-height: 2em;
+            }
+            h2{
+                text-align: center;
+                margin-bottom: 78px;
+            }
+        }
+    }
+}
+

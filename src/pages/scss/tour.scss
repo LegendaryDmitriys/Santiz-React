@@ -1,0 +1,133 @@
+.wrapper_tickets{
+    max-width: 1715px;
+    margin: 0 auto;
+    color:#fff;
+    
+    h2 {
+        margin-bottom: 60px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 40px;
+        line-height: 47px;
+    }
+
+ 
+    h2::after {
+        content: "";
+        display: block;
+        width: 1715px;
+        padding-top: 45px;
+        border-bottom: 1px solid #5c5c5c;
+    }
+    
+
+}
+
+
+.content_tickets{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    img {
+        margin-bottom: 93px;
+    }
+
+    svg {
+        margin: 0 auto;
+    }
+
+    h3 {
+        margin-bottom: 100px;
+        text-align: center;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 36px;
+        line-height: 42px;
+    }
+
+    h3::after{
+        content: "";
+        display: block;
+        width: 1715px;
+        padding-top: 330px;
+        border-bottom: 1px solid #5c5c5c;
+        }
+}
+
+.content_info_tickets {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 70px;  
+     
+}
+
+
+.content_info_tickets_mid {
+    display: flex;
+    flex-direction: column;
+    width: 415px;
+    
+
+}
+
+
+
+.title_content_info_tickets{
+    h2{
+        margin-bottom: 59px;
+    }
+
+}
+
+
+.content_info_tickets_right{
+    button{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 28px;
+        text-align: center;
+
+        background: #000000;
+        border: 2px solid #FFFFFF;
+        border-radius: 46px;
+
+        color: #FFFFFF;
+
+        width: 200px;
+        height: 78px;
+        display: block;
+        font-weight: 400;
+        font-size: 17px;
+        color: #fff;
+        background-color: #326CF9;
+        padding: 10px;
+        text-align: center;
+        border-radius: 40px;
+        cursor: pointer; 
+        transition: 0.2s;
+        margin-top: auto; 
+        border: none;
+    }
+    button:hover {
+        background-color: #fff;
+        color: #326CF9;
+        border-color: #fff;
+    }
+}
+
+
+.content_info_tickets__text {
+    margin-bottom: 40px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+
+}

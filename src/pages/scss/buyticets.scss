@@ -1,0 +1,448 @@
+.wrap {
+    padding: 0 26px;
+}
+
+
+.tickets__pages {
+    display: flex;
+    margin-bottom: 30px
+
+
+   
+ 
+}
+
+@media only screen and (max-width: 768px) {
+    .event-header {
+        display:block;
+        margin-bottom: 50px
+    }
+}
+
+.event-header__info-container {
+    display: flex;
+    align-items: flex-start;
+    flex: 1
+}
+
+@media only screen and (max-width: 768px) {
+    .event-header__info-container {
+        display:block
+    }
+}
+
+.event-header__left-col {
+    flex: none;
+    margin-right: 26px;
+    width: 210px
+
+    img {
+        max-width: 100%;
+        display: block; 
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .event-header__left-col {
+        width:100%;
+        margin: 0 0 10px
+    }
+}
+
+.event-header__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+    .event-header__title {
+        font-size:18px;
+        margin-bottom: 14px
+    }
+}
+
+.event-header__type {
+    color: #a1a5c0;
+    margin-bottom: 20px
+}
+
+.event-header__age {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    border: 1px solid #326CF9;
+}
+
+.event-header__desktop-age {
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+.event-header__info {
+    font-size: 16px
+
+}
+
+@media only screen and (max-width: 768px) {
+    .event-header__info {
+        font-size:14px
+    }
+}
+
+.event-header__info-item+.event-header__info-item {
+    margin-top: 13px;
+    display: flex
+}
+
+.event-header__icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    flex: none;
+    fill: #fff;
+}
+
+@media only screen and (max-width: 500px) {
+    .event-header__icon {
+        margin-right:6px
+    }
+}
+
+.event-header__location {
+    overflow: hidden;
+    margin-top: 13px
+}
+
+.hidden .event-header__location:not(:first-child) {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0
+}
+
+.expanded .event-header__location {
+    transition: max-height .2s linear 0s,margin-top .2s linear 0s,opacity .2s linear .2s;
+    will-change: max-height,margin-top,opacity;
+    max-height: 50px;
+    opacity: 1;
+    margin-top: 13px
+}
+
+.event-header__location-link {
+    color: #326CF9;
+    display: inline-flex;
+    text-decoration: none
+}
+
+.event-page-message {
+    margin-bottom: 50px;
+    color: #a1a5c0;
+    font-size: 20px;
+}
+
+.event-page__tabs{
+    border-bottom: 1px solid #e8ecef;
+    margin-top: 50px;
+}
+.tabs__btn {
+    font-size: 24px;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ec1b23;
+    background:none;
+    border:none;
+    color: #fff;
+    margin-right: 20px;
+}
+.tabs_btn:active {
+    border-color: #ec1b23;
+    cursor: default;
+}
+
+
+.event-header__seance-times {
+    display: inline-block
+}
+
+.event-header__seance-links {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 10pt;
+    margin-top: 10px;
+    color: #a1a5c0;
+    flex-wrap: wrap
+}
+
+.event-header__seance-links li {
+    margin-right: 10px
+}
+
+.event-header__seance-links li::after {
+    content: "|";
+    margin-left: 10px
+}
+
+.event-header__seance-links li:last-child {
+    margin-right: 0
+}
+
+.event-header__seance-links li:last-child::after {
+    content: ""
+}
+
+.event-header__additional-link {
+    color: #a1a5c0;
+    flex: none;
+    text-decoration: none
+}
+
+.event-header__additional-link:hover {
+    color: #13192a
+}
+
+.event-header__location-expand {
+    font-size: 14px;
+    color: #a1a5c0;
+    display: flex;
+    cursor: pointer;
+    margin-top: 13px
+}
+
+.event-header__location-expand svg {
+    transition: transform .2s linear 0s;
+    will-change: transform
+}
+
+.event-header__purchase {
+    background: repeat-y linear-gradient(to top,rgba(161,165,192,.7) 50%,#fff 50%) 0 0/1px 10px;
+    text-align: center;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 35px;
+}
+
+.event-header__price-info{
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.event-header__price{
+    p{
+    font-size: 22px;
+    font-weight: 700;
+    white-space: nowrap;
+    }
+
+}
+
+
+.event-header__commission{
+    color: #a1a5c0;
+    margin-top: 10px;
+}
+
+.event-header__buy-btn {
+    border-radius: 2px;
+    transition: opacity .2s linear 0s;
+    will-change: opacity;
+    background: #326CF9;
+    color: #fff;
+    white-space: nowrap;
+    text-decoration: none;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+
+
+
+.concert-ticket-purchase-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    margin-top: 50px;
+    h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+  
+    .seating-chart {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+  
+      .row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        div {
+            background-color: #D9D9D9;
+            padding: 12px 14px;
+            margin-right: 8px;
+            width: 60px;
+            cursor: pointer;
+            height: 48px;
+            box-sizing: border-box;
+            border-radius: 6px;
+            font-weight: 700;
+            text-align: center;
+            border: 2px solid #D9D9D9;
+            color: #000;
+        }
+
+        div.selected {
+            border: 2px solid #146DF2;
+        }
+
+        .seat {
+          width: 4rem;
+          height: 4rem;
+          border-radius: 5px;
+          background-color: #ccc;
+          margin: 0.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          font-weight: bold;
+          font-size: 1.2rem;
+          border: none;
+  
+          &.selected {
+            background-color: #007bff;
+            color: white;
+          }
+        }
+      }
+    }
+  
+    .selected-seats {
+      text-align: start;
+      color:red
+  
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+  
+  }
+  
+
+  .event-header__cover{
+    max-width: 30vh;
+  }
+
+  .concert-ticket_desc{
+    margin-bottom: 47px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    max-width: 100%;
+  }
+
+  .event-header__info-item{
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color:#fff;
+    margin-bottom: 80px;
+  }
+
+
+  .event-header__seance-times{
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color:#fff;
+   
+  }
+
+
+  .modal-tickets{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: black;
+    padding: 30px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+    border: 1px solid white;
+  }
+
+  .modal-content-tickets{
+
+  }
+
+  .modal-tickets-form{
+    display: flex;
+    flex-direction: column;
+
+
+    input {
+        outline: none;
+        display: block;
+        background: rgba(50, 108, 249, 0.1);
+        width: 100%;
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        padding: 8px 20px;
+        color: gray;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: semibold;
+        line-height: inherit;
+        transition: 0.3s ease
+    }
+  }
+
+
+  .modal-tickets-btn__close{
+    background:transparent;
+    border:none;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0%;
+  }
+
+
+
+  .seats-buy {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #326CF9;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 20px;
+
+    .seats-buy:hover {
+      background-color: #326CF9;
+    }
+  }

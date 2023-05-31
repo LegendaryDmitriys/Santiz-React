@@ -1,0 +1,14 @@
+.custom-cursor {
+    position: fixed;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #000;
+    opacity: 0.5;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    transition: transform 0.1s ease-in-out;
+    transform: translate(-50%, -50%);
+  }
+  
