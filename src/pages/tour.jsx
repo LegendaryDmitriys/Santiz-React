@@ -15,7 +15,7 @@ function Tour() {
 
   const getAllTours = async () => {
     try {
-      const response = await fetch("http://192.168.0.104//tour.php");
+      const response = await fetch("http://95.213.151.174//tour.php");
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {

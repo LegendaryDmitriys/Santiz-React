@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import "./scss/buyticets.scss"
 import { useParams } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
+import jwt_decode from 'jwt-decode';
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function ConcertTicket() {
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [numSeats, setNumSeats] = useState(0);
     const [descriptionVisible, setDescriptionVisible] = useState(true);
     const [ticketVisible, setTicketVisible] = useState(false);
-    const [eventInfo, setEventInfo] = useState(null)
+    const [eventInfo, setEventInfo] = useState(null);
+    const [ticketInfo, setTicketInfo] = useState(null)
 
     const { id } = useParams();
 
@@ -16,14 +21,25 @@ function ConcertTicket() {
 
         const fetchEventInfo = async () => {
           try {
-            const response = await fetch(`http://192.168.0.104/tour-info.php?id=${id}`); 
+            const response = await fetch(`http://95.213.151.174/tour-info.php?id=${id}`); 
             const data = await response.json();
             setEventInfo(data); 
           } catch (error) {
-            console.log('Error fetching event information:', error);
+            console.log('Ошибка', error);
           }
         };
-    
+
+        const fetchTicketInfo = async () => {
+          try {
+            const ticketResponse = await fetch(`http://95.213.151.174/ticket.php`);
+            const ticketData = await ticketResponse.json();
+            setTicketInfo(ticketData);
+          } catch (error) {
+            console.log('Ошибка при получении информации о билетах:', error);
+          }
+        };
+
+        fetchTicketInfo();
         fetchEventInfo();
       }, [id]);
 
@@ -50,43 +66,46 @@ function ConcertTicket() {
       };
     
 
-
-    const [showModal, setShowModal] = useState(false);
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
   
-    const handleOpenModal = () => {
-      setShowModal(true);
-    };
-  
-    const handleCloseModal = () => {
-      setShowModal(false);
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      // Дополнительная обработка данных заказа (например, отправка на сервер)
-  
-      // Сброс значений полей после отправки заказа
-      setName("");
-      setSurname("");
-      setEmail("");
-      setPhone("");
-  
-      // Закрытие модального окна
-      setShowModal(false);
-    };
-
-
-
-
-
-
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        try {
+          const token = localStorage.getItem("loginToken");
+          if (token) {
+            const decodedToken = jwt_decode(token);
+            const userId = decodedToken.data.user_id;
+            const tourIds = id;
+            const selectedSeats = ticketInfo.map(ticket => ticket.seat_number);
+            const ticketIds = ticketInfo.map(ticket => ticket.id);
+            const prices = ticketInfo.map(ticket => ticket.price);
+      
+            const requestBody = {
+              userId: userId,
+              selectedSeats: selectedSeats,
+              ticketIds: ticketIds,
+              tourIds: tourIds,
+              prices: prices,
+            };
+      
+            const response = await axios.post("http://95.213.151.174/successful_tickets.php", requestBody);
+      
+            if (response.data.success) {
+              // Билеты успешно добавлены в таблицу успешных заказов
+              toast.success("Билеты успешно добавлены в таблицу успешных заказов");
+            } else {
+              // Произошла ошибка при добавлении билетов в таблицу успешных заказов
+              toast.error("Ошибка при добавлении билетов в таблицу успешных заказов");
+            }
+          }
+        } catch (error) {
+          toast.error("Ошибка при отправке запроса на сервер: ", error);
+        }
+      };
+      
     return (
         <div>
+          <ToastContainer />
             {eventInfo && (
             <div key={eventInfo.id} className='wrap'>
             <section className='tickets__pages'>
@@ -125,84 +144,37 @@ function ConcertTicket() {
                 <button className="tabs__btn" onClick={handleTicketClick}>Билеты</button>
                 <button className="tabs__btn" onClick={handleDescriptionClick}>Описание</button>
             </div>
-            {ticketVisible && (
-            <section className="concert-ticket-purchase-page">
-                <h2>Ряд 1</h2>
-                <div className="seating-chart">
-                  <div className="row">
-                    <div
-                      className={`seat ${selectedSeats.includes('A1') ? 'selected' : ''}`}
-                      onClick={() => handleSeatClick('A1')}
-                    >
-                      {eventInfo.seat_number}
-                      
-                    </div>
-                  </div>
-                </div>
-                <div className="selected-seats">
-                    <h2>Выбранные места:</h2>
-                    <p>{selectedSeats.join(', ')}</p>
-                    <p>Общее количество выбраных билетов: {numSeats}</p>
-                </div>
-                <button className="seats-buy" onClick={handleOpenModal}>Оформить заказ</button>
-                
-                {showModal && (
-        <div className="modal-tickets">
-          <div className="modal-content-tickets">
-            <h2>Оформление заказа</h2>
-            <form className="modal-tickets-form" onSubmit={handleSubmit}>
-              <label>
-                Имя:
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              <label>
-                Фамилия:
-                </label>
-                <input
-                  type="text"
-                  value={surname}
-                  onChange={(e) => setSurname(e.target.value)}
-                  required
-                />
-              <label>
-                Почта:
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              <label>
-                Номер телефона:
-                </label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                />
-              <button className="seats-buy" type="submit">Отправить заказ</button>
-            </form>
-            <button className='modal-tickets-btn__close' onClick={handleCloseModal}><AiOutlineClose size={30}/></button>
-          </div>
-        </div>
-      )}
-            </section>
-            )}
-             {descriptionVisible && (
+            {descriptionVisible && (
                  <section className="concert-ticket-purchase-page">
                     <p className='concert-ticket_desc'>{eventInfo.description}</p>
                  </section>
                       )}
-            </div>
+                      </div>
+                    )}
+            {ticketVisible && (
+              <section className="concert-ticket-purchase-page">
+                <div className="seating-chart">
+                  {ticketInfo.map((ticket) => (
+                    <div key={ticket.id} className="row">
+                      <div
+                        className={`seat ${selectedSeats.includes(ticket.seat_number) ? 'selected' : ''}`}
+                        onClick={() => handleSeatClick(ticket.seat_number)}
+                      >
+                        {ticket.seat_number}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="selected-seats">
+                  <h2>Выбранные места:</h2>
+                  <p>{selectedSeats.join(', ')}</p>
+                  <p>Общее количество выбранных билетов: {numSeats}</p>
+                </div>
+                <button className="seats-buy" onClick={handleSubmit}>Оформить заказ</button>
+              </section>
+  
             )}
-        </div>
+            </div>
   );
 }
 

@@ -59,7 +59,9 @@
     align-content: stretch;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-direction: column;
     color:#FFFFFF;
+    
 }
 
 .button{
@@ -88,6 +90,12 @@
     }
 }
 
+.content-all{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .content-left{
     font-family: 'Roboto';
     font-style: normal;
@@ -106,6 +114,10 @@
     flex-direction: column;
     align-items: flex-end;
     
+}
+
+.track-text {
+    color: #fff;
 }
 
 .time{

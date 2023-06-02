@@ -17,35 +17,36 @@ function About_Product(props) {
 
   const addToCart = () => {
     if (isAddingToCart) {
-      return; // Если уже выполняется добавление в корзину, ничего не делаем
+      return;
     }
-
+  
     const token = localStorage.getItem("loginToken");
     if (token) {
       const decodedToken = jwt_decode(token);
       const userId = decodedToken.data.user_id;
       setIsAddingToCart(true);
-
-      fetch("http://192.168.0.104/auth-api/product.php", {
+  
+      fetch("http://95.213.151.174/auth-api/product.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           product: item.id,
           size: selectedSize,
-          userId: userId
-        })
+          userId: userId,
+        }),
       })
-      .then(response => response.json())
-      .catch(error => toast.error(error))
-      .finally(() => {
-        setIsAddingToCart(false);
-      });
+        .then((response) => response.json())
+        .catch((error) => toast.error(error))
+        .finally(() => {
+          setIsAddingToCart(false);
+        });
     } else {
       toast.error("Пользователь не авторизирован.");
     }
-  }
+  };
+  
   
 
   return (
@@ -60,7 +61,14 @@ function About_Product(props) {
         </div>
         <div className="product__half product__half_description">
           <div className="productAbout">
-            <h3 className="product__price">{item.price}<span>₽</span></h3>
+          {item.discount_percent > 0 ? (
+              <h3 className="product__price">
+                {item.discounted_price}
+                <span>₽</span>
+              </h3>
+            ) : (
+              <h3 className="product__price">{item.price}<span>₽</span></h3>
+            )}
             <div className="productSelectSize">
               <div className="productSelectSize__label">Размер RU</div>
               <div className="SizeSelect">
@@ -78,9 +86,9 @@ function About_Product(props) {
               <div className="productAbout__addToCart">
                 <button
                   onClick={addToCart}
-                  disabled={isAddingToCart} // Блокируем кнопку, если идет процесс добавления в корзину
+                  disabled={isAddingToCart}
                 >
-                  {isAddingToCart ? "Добавление..." : "Перейти в корзину"}
+                  {isAddingToCart ? "Добавление..." : "Добавить в корзину"}
                 </button>
               </div>
               <div className="productAbout_info"></div>

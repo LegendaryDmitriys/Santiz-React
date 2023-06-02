@@ -57,7 +57,12 @@
 
 }
    
-.card{
+.product-card-container{
+    height: 550px;
+    overflow: auto;
+}
+
+.card-history{
     background-color: #1E1F21;
     border-radius: 28px;
     box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
@@ -67,6 +72,8 @@
     width: 1158px;
     max-width: 100%;
     text-align: center;
+    height: inherit;
+    height: 600px;
 
 
 

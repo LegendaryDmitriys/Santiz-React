@@ -15,10 +15,10 @@ function HistoryBasket() {
               const decodedToken = jwt_decode(token);
               const userId = decodedToken.data.user_id;
     
-              const basketResponse = await fetch(`http://192.168.0.104/get_merch.php?user_id=${userId}`);
+              const basketResponse = await fetch(`http://95.213.151.174/get_merch.php?user_id=${userId}`);
               const basketData = await basketResponse.json();
     
-              const response = await fetch(`http://192.168.0.104/history_orders.php?user_id=${userId}`);
+              const response = await fetch(`http://95.213.151.174/history_orders.php?user_id=${userId}`);
               const ordersData = await response.json();
     
               const mergedData = ordersData.map(order => {
@@ -54,7 +54,7 @@ function HistoryBasket() {
         <div>
             <div className="setting__wrapper">
                 <User_Panel/>
-                <div className="card">
+                <div className="card-history">
                     <div className="card__header">
                         <div className="cart-header__type">Товар</div>
                         <div className="cart-header__title">Наименование</div>
@@ -63,6 +63,7 @@ function HistoryBasket() {
                         <div className="cart-header__cost">Стоимость</div>
                         <div className="cart-header__delete">Дата покупки</div>
                     </div>
+                    <div className="product-card-container">
                         {successfulOrder.map(item => (
                         <div key={[item.id, item.purchase_date, item.selected_size]} className="product_card">
                             <div className="product__img"><img src={item.image_url}alt=""/></div>
@@ -76,9 +77,12 @@ function HistoryBasket() {
                                 <div className="card__text">{item.selected_size}</div>
                             </div>
                             <div className="product__price">{item.total_price}</div>
-                            <div className="product__date">{item.purchase_date}</div>
+                            <div className="product__date">
+                              {item.purchase_date}
+                            </div>
                             </div>
                         ))}
+                        </div>
                         </div>
                 </div>
             </div>

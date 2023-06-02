@@ -244,6 +244,7 @@ function Basket () {
               <div className="cart-header__cost">Стоимость</div>
               <div className="cart-header__delete">Удалить</div>
             </div>
+            <div className="product-card-container">
             {mergedData.map((item) => (
                 <div key={item.id} className="product_card">
                   <div className="product__img"><img src={item.image_url} alt=""/></div>
@@ -277,6 +278,8 @@ function Basket () {
               </div>
               <button onClick={() => handleCheckout()}>Перейти к оплате</button>
             </div>
+            </div>
+
           </div>
         </div>
       </div>

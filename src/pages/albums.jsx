@@ -20,13 +20,13 @@ function Albums() {
   }, []);
 
   const getAllAlbums = async () => {
-    const response = await fetch("http://192.168.0.104//api.php");
+    const response = await fetch("http://95.213.151.174//api.php");
     const jsonData = await response.json();
     setAlbums(jsonData);
   };
 
   const AlbumsModalOpen = async (albumId) => {
-    const response = await fetch(`http://192.168.0.104//api.php?album_id=${albumId}`);
+    const response = await fetch(`http://95.213.151.174//api.php?album_id=${albumId}`);
     const jsonData = await response.json();
     setCurrentTracks(jsonData);
     setShowModal(true);
@@ -39,7 +39,7 @@ function Albums() {
     if (album) {
       return album.image_url;
     }
-    return ""; // Возвращаем пустую строку, если изображение альбома не найдено
+    return "";
   };
 
   const TrackClick = (trackUrl,trackId) => {
@@ -99,13 +99,15 @@ const VolumeChange = (event) => {
           {albums.map((album) => (
             <div key={album.id} className="Cards-content">
               <img src={album.image_url} alt="" />
-              <div className="content-left">
-                <p>ПРОДОЛЖИТЕЛЬНОСТЬ</p>
-                <p>ДАТА РЕЛИЗА</p>
-              </div>
-              <div className="content-right">
-                <p>{album.duration}</p>
-                <p>{album.release_date}</p>
+              <div className="content-all">
+                <div className="content-left">
+                  <p>ПРОДОЛЖИТЕЛЬНОСТЬ</p>
+                  <p>ДАТА РЕЛИЗА</p>
+                </div>
+                <div className="content-right">
+                  <p>{album.duration}</p>
+                  <p>{album.release_date}</p>
+                </div>
               </div>
               <div className="button">
                 <button onClick={() => AlbumsModalOpen(album.id)}>Прослушать</button>
@@ -145,7 +147,7 @@ const VolumeChange = (event) => {
                 }
               </span>
               </div>
-              <p>{track.name}</p>
+              <p className="track-text">{track.name}</p>
             </article>
           </div>
         </div>

@@ -148,14 +148,29 @@
     flex-wrap: wrap-reverse;
     justify-content: flex-end;
   }
+
+  .card__price--common-a{
+    font-weight: 400;
+    font-size: 17px;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+  }
   
   .card__price--common::before {
-    content: "Обычная";
+    content: "Стоимость";
     font-weight: 400;
     font-size: 13px;
     color: #bfbfbf;
   }
-  
+
+  .card__price--common-a::before {
+    content: "Стоимость";
+    font-weight: 400;
+    font-size: 13px;
+    color: #bfbfbf;
+  }
   
   .card__title {
     display: block;

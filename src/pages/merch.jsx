@@ -20,7 +20,7 @@ function Merch() {
 
   const getAllMerch= async () => {
     try {
-      const response = await fetch("http://192.168.0.104//merch.php");
+      const response = await fetch("http://95.213.151.174//merch.php");
       const jsonData = await response.json();
       setData(jsonData);
       setSortedData(jsonData);
@@ -32,11 +32,10 @@ function Merch() {
   const SortByPrice = async () => {
     const cards = document.querySelectorAll(".card__merch");
     const sorted = [...sortedData].sort((a, b) =>
-      isSortedAsc ? a.discounted_price - b.discounted_price : b.discounted_price - a.discounted_price
+      isSortedAsc ? a.price - b.price : b.price - a.price
     );
     setIsSortedAsc(!isSortedAsc);
   
-    // Запускаем анимацию прятания карточек
     const animationPromises = [];
     cards.forEach((card, index) => {
       const promise = new Promise((resolve) => {
@@ -51,10 +50,8 @@ function Merch() {
       animationPromises.push(promise);
     });
   
-    // Дожидаемся завершения анимации
     await Promise.all(animationPromises);
   
-    // Обновляем данные и запускаем анимацию появления карточек
     setSortedData(sorted);
     cards.forEach((card, index) => {
       setTimeout(() => {
@@ -74,6 +71,7 @@ function Merch() {
   };
 
   const QuantitySort = () => {
+    const cards = document.querySelectorAll(".card__merch");
     const sortedData = [...data].sort((a, b) => {
       return isSortQuantity ? a.quantity - b.quantity : b.quantity - a.quantity;
     });
@@ -118,7 +116,7 @@ function Merch() {
                         </div>
                       </>
                     ) : (
-                      <div className="card__price">{merch.price}₽</div>
+                      <div class="card__price card__price--common-a">{merch.price}₽</div>
                     )}
                   </div>
                   <a href="#" className="card__title">

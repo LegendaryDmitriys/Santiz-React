@@ -19,10 +19,6 @@ function Setting() {
 
     const defaultImageUrl = "https://ie.wampi.ru/2023/05/30/default-img.jpg";
     
-    const [userData, setUserData] = useState({
-      firstName: "",
-      lastName: ""
-    });
     
 
     const handleConfirmNewPasswordChange = (event) => {
@@ -48,7 +44,7 @@ function Setting() {
       const decodedToken = jwt_decode(token);
       const userId = decodedToken.data.user_id;
       try {
-        const response = await axios.post("http://192.168.0.104/changePassword.php", {
+        const response = await axios.post("http://95.213.151.174/changePassword.php", {
           userId: userId,
           oldPassword: oldPassword,
           newPassword: newPassword,
@@ -82,15 +78,12 @@ function Setting() {
       const decodedToken = jwt_decode(token);
       const userId = decodedToken.data.user_id;
       try {
-        const response = await axios.post("http://192.168.0.104/PersonalData.php", {
+        const response = await axios.post("http://95.213.151.174/PersonalData.php", {
           userId: userId,
           firstName: firstName,
           lastName: lastName,
         });
         // обновляем переменные состояния в React для отображения новых данных
-        setFirstName(firstName);
-        setLastName(lastName);
-        setUserData({ firstName: firstName, lastName: lastName });
         toast.success("Данные успешно обновленны")
       } catch (error) {
         toast.error("Ошибка сохранения данных");
@@ -112,7 +105,7 @@ function Setting() {
       const formData = new FormData();
       formData.append("file", selectedFile);
       try {
-        const response = await axios.post("http://192.168.0.104/addfile.php", formData, {
+        const response = await axios.post("http://95.213.151.174/addfile.php", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -122,7 +115,7 @@ function Setting() {
         const token = localStorage.getItem("loginToken");
           const decodedToken = jwt_decode(token);
           const userId = decodedToken.data.user_id;
-        await axios.post("http://192.168.0.104/settings.php", {
+        await axios.post("http://95.213.151.174/settings.php", {
           userId: userId,
           avatarUrl: response.data.fileUrl,
         });
@@ -137,7 +130,7 @@ function Setting() {
     return(
     <div>
         <div className="setting__wrapper">
-            <User_Panel user1={userData}/>
+            <User_Panel/>
             <div className="setting__profile">
               <ToastContainer />
                 <div className="setting__avatar">

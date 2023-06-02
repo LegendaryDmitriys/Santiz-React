@@ -16,22 +16,28 @@ const User_Panel = () => {
       return cachedData ? JSON.parse(cachedData) : [];
     });
   
-    useEffect(() => {
-      const token = localStorage.getItem("loginToken");
-      const decodedToken = jwt_decode(token);
-      const userId = decodedToken.data.user_id;
-  
-      axios.post('http://192.168.0.104/userpanel.php', null, {
+const defaultImageUrl = "https://ie.wampi.ru/2023/05/30/default-img.jpg";
+
+useEffect(() => {
+  const token = localStorage.getItem("loginToken");
+  if (token) {
+    const decodedToken = jwt_decode(token);
+    const userId = decodedToken.data.user_id;
+
+    axios
+      .post("http://95.213.151.174/userpanel.php", null, {
         params: {
-          userId: userId
-        }
+          userId: userId,
+        },
       })
-      .then(response => {
+      .then((response) => {
         setUserProfiles(response.data);
-        localStorage.setItem('userProfiles', JSON.stringify(response.data));
+        localStorage.setItem("userProfiles", JSON.stringify(response.data));
       })
-      .catch(error => toast.error(error));
-    }, []);
+      .catch((error) => toast.error(error));
+  }
+}, []);
+
 
 
     return (
@@ -40,7 +46,7 @@ const User_Panel = () => {
                 <div className="setting-container">
                     {userProfiles.map(userProfile => (
                         <div key={userProfile.id}>
-                          <img className="round" src={userProfile.image_path ? userProfile.image_path : 'http://192.168.0.104/uploads/default-img.png'} alt="user" />
+                          <img className="round" src={userProfile.image_path || defaultImageUrl} alt="user" />
                             <h3>{userProfile.first_name} {userProfile.last_name}</h3>
                         </div>
                         ))}
