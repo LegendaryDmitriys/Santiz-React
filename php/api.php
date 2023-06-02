@@ -7,11 +7,11 @@ if (!$dbconn) {
     die("Connection failed: " . pg_last_error());
 }
 
-// Check if album_id is set in the request
+
 if (isset($_GET['album_id'])) {
     $albumId = pg_escape_string($_GET['album_id']);
 
-    // Query tracks for a specific album
+
     $query = "SELECT * FROM track WHERE album_id = $albumId";
     $result = pg_query($dbconn, $query);
 
@@ -28,7 +28,7 @@ if (isset($_GET['album_id'])) {
 
     pg_free_result($result);
 } else {
-    // Query all albums
+
     $query = "SELECT * FROM albums";
     $result = pg_query($dbconn, $query);
 

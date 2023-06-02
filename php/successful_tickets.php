@@ -21,7 +21,7 @@ try {
     $prices = $succes_ticket['prices'];
 
 
-    // Подготовка и выполнение запроса вставки данных
+
     $query = pg_prepare($dbconn, "insert_query", "INSERT INTO successful_orders_tickets (user_id, seat, id_tickets, tour_id, price) VALUES ($1, $2, $3, $4, $5)");
 
     foreach ($selectedSeats as $index => $seat) {
@@ -31,7 +31,7 @@ try {
             throw new Exception("Ошибка при выполнении запроса на вставку данных");
         }
 
-        // Обновление статуса билета на "куплено"
+
         $updateQuery = "UPDATE tickets SET is_sold = true WHERE id = " . $ticketIds[$index];
         $updateResult = pg_query($dbconn, $updateQuery);
 
@@ -40,15 +40,14 @@ try {
         }
     }
 
-    // Отправка успешного ответа клиенту
+
     $response = array('success' => true);
     echo json_encode($response);
 } catch (Exception $e) {
-    // Отправка ошибки клиенту
+
     $response = array('success' => false, 'error' => $e->getMessage());
     echo json_encode($response);
 }
 
-// Закрытие соединения с базой данных
 pg_close($dbconn);
 ?>

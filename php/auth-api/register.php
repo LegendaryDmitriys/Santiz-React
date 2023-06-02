@@ -18,7 +18,6 @@ function msg($success, $status, $message, $extra = [])
     ], $extra);
 }
 
-// DATA FORM REQUEST
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
 
@@ -38,7 +37,7 @@ elseif (
     $fields = ['fields' => ['name', 'email', 'password']];
     $returnData = msg(0, 422, 'Пожалуйста, заполните все обязательные поля!', $fields);
 
-// IF THERE ARE NO EMPTY FIELDS THEN-
+
 else :
 
     $name = trim($data->name);
@@ -68,8 +67,6 @@ else :
                 $insert_query = "INSERT INTO users(name,email,password) VALUES(:name,:email,:password)";
 
                 $insert_stmt = $conn->prepare($insert_query);
-
-                // DATA BINDING
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':email', $email, PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);

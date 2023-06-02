@@ -22,11 +22,11 @@ $conn = $db_connection->dbConnection();
 $data = json_decode(file_get_contents("php://input"));
 $returnData = [];
 
-// IF REQUEST METHOD IS NOT EQUAL TO POST
+
 if($_SERVER["REQUEST_METHOD"] != "POST"):
     $returnData = msg(0,404,'Страница не найдена!');
 
-// CHECKING EMPTY FIELDS
+
 elseif(!isset($data->email)
     || !isset($data->password)
     || empty(trim($data->email))
@@ -36,20 +36,20 @@ elseif(!isset($data->email)
     $fields = ['fields' => ['email','password']];
     $returnData = msg(0,422,'Пожалуйста, заполните все обязательные поля!',$fields);
 
-// IF THERE ARE NO EMPTY FIELDS THEN-
+
 else:
     $email = trim($data->email);
     $password = trim($data->password);
 
-    // CHECKING THE EMAIL FORMAT (IF INVALID FORMAT)
+
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
         $returnData = msg(0,422,'Ваш логин должен состоять не менее чем из 6 символов!');
 
-    // IF PASSWORD IS LESS THAN 8 THE SHOW THE ERROR
+ 
     elseif(strlen($password) < 8):
         $returnData = msg(0,422,'Ваш пароль должен состоять не менее чем из 8 символов!');
 
-    // THE USER IS ABLE TO PERFORM THE LOGIN ACTION
+
     else:
         try{
 
@@ -58,13 +58,12 @@ else:
             $query_stmt->bindValue(':email', $email,PDO::PARAM_STR);
             $query_stmt->execute();
 
-            // IF THE USER IS FOUNDED BY EMAIL
+ 
             if($query_stmt->rowCount()):
                 $row = $query_stmt->fetch(PDO::FETCH_ASSOC);
                 $check_password = password_verify($password, $row['password']);
 
-                // VERIFYING THE PASSWORD (IS CORRECT OR NOT?)
-                // IF PASSWORD IS CORRECT THEN SEND THE LOGIN TOKEN
+
                 if($check_password):
 
                     $jwt = new JwtHandler();
@@ -79,12 +78,12 @@ else:
                         'token' => $token
                     ];
 
-                // IF INVALID PASSWORD
+
                 else:
                     $returnData = msg(0,422,'Неверный пароль');
                 endif;
 
-            // IF THE USER IS NOT FOUNDED BY EMAIL THEN SHOW THE FOLLOWING ERROR
+
             else:
                 $returnData = msg(0,422,'Неверная почта!');
             endif;
