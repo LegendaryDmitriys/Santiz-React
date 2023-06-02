@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "YourNamespace\\": "path/to/your/classes/directory/"
+    }
+  },
+  "require": {
+    "firebase/php-jwt": "^6.4",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "ext-pgsql": "*"
+  }
+}
